@@ -8,7 +8,15 @@ services:
     build: b03
     ports:
       - "8083:8080"
-#   b4:
-#     build: b04
-#     ports:
-#       - "8080:8084"
+  #   b4:
+  #     build: b04
+  #     ports:
+  #       - "8080:8084"
+  f1:
+    build: f01
+    ports:
+      - "4201:4201"
+  b2:
+    build: b02
+    ports:
+      - "8082:8080"

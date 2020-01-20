@@ -37,9 +37,9 @@ func main() {
 	// Migrate the schema
 	db.AutoMigrate(&Tweet{})
 
-	http.HandleFunc("/getweets", getTweets)
-	http.HandleFunc("/savetweet", saveTweet)
-	http.HandleFunc("/unsavetweet", unsaveTweet)
+	http.HandleFunc("/tweet/all", getTweets)
+	http.HandleFunc("/tweet/save", saveTweet)
+	http.HandleFunc("/tweet/delete", unsaveTweet)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 

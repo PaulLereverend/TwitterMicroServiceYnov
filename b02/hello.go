@@ -26,7 +26,7 @@ type Response struct {
 var DB *gorm.DB
 
 func main() {
-	db, err := gorm.Open("sqlite3", "tweet_user.db")
+	db, err := gorm.Open("sqlite3", "bdd/tweet_user.db")
 	if err != nil {
 		panic("failed to connect database")
 	} else {

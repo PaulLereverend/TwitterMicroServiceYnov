@@ -1,0 +1,14 @@
+version: "3"
+services:
+  #   b1:
+  #     build: b01
+  #     ports:
+  #       - "8080:8081"
+  b3:
+    build: b03
+    ports:
+      - "8083:8080"
+#   b4:
+#     build: b04
+#     ports:
+#       - "8080:8084"

@@ -14,6 +14,10 @@ public class User {
   private String username;
 
   private String password;
+  private String apikey;
+  private String apikeysecret;
+  private String accesstoken;
+  private String accesstokensecret;
 
   public Integer getId() {
     return id;
@@ -38,5 +42,33 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+  public String getapikey() {
+	return apikey;
+ }
+
+  public void setapikey(String apikey) {
+	this.apikey = apikey;
+  }
+  public String getapikeysecret() {
+		return apikeysecret;
+	 }
+
+	  public void setapikeysecret(String apikeysecret) {
+		this.apikeysecret = apikeysecret;
+	  }
+  public String getaccesstoken() {
+	return accesstoken;
+  }
+  public void setaccesstoken(String accesstoken) {
+    this.accesstoken = accesstoken;
+ }
+  public String getaccesstokensecret() {
+	return accesstokensecret;
+  }
+  public void setaccesstokensecret(String accesstokensecret) {
+    this.accesstokensecret = accesstokensecret;
+ }
+  
+
 }
 

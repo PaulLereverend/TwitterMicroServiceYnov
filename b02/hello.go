@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -18,11 +19,8 @@ type Tweet struct {
 
 //DB variable globale de la bdd
 var DB *gorm.DB
-var i = 0
 
 func main() {
-	fmt.Println("Hello, world. 2")
-
 	db, err := gorm.Open("sqlite3", "test.db")
 	if err != nil {
 		panic("failed to connect database")
@@ -34,45 +32,46 @@ func main() {
 	// Migrate the schema
 	db.AutoMigrate(&Tweet{})
 
-	i++
-	// Create
-	db.Create(&Tweet{IDUser: "L1212", IDTweet: fmt.Sprintf("%s%d", "qsd43", i)})
-
-	// Read
-	// var tweet Tweet
-	// db.Find(&tweet)
-	// db.First(&tweet, 1) // find tweet with id 1
-	// db.First(&tweet, "id_tweet = ?", "L1212") // find tweet with IDTweet l1212
-	// fmt.Println(&tweet)
-
-	// Update - update tweet's IDTweet to qsd43Ezez43
-	// db.Model(&tweet).Update("id_tweet", "qsd43Ezez43")
-
-	// Delete - delete tweet
-	// db.Delete(&tweet)
-
-	http.HandleFunc("/", hello)
+	http.HandleFunc("/getweets", getTweets)
+	http.HandleFunc("/savetweet", saveTweet)
+	http.HandleFunc("/unsavetweet", unsaveTweet)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.Error(w, "404 not found.", http.StatusNotFound)
-		return
-	}
-
+func getTweets(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
+		//recup l'id user
 		idUser := r.FormValue("id_user")
 
+		//recup tout les tweets de l'utilisateur
 		var tweets []Tweet
-		DB.Where("id_user = ?", idUser).Find(&tweets) // find tweet with IDUser l1212
+		DB.Where("id_user = ?", idUser).Find(&tweets)
 
-		for _, tweet := range tweets {
-			fmt.Fprintf(w, tweet.IDTweet+"\n")
+		//encode en JSON les tweets
+		pagesJSON, err := json.Marshal(tweets)
+		if err != nil {
+			log.Fatal("Cannot encode to JSON ", err)
 		}
-	} else if r.Method == "POST" {
-		i++
+		fmt.Fprintf(w, fmt.Sprintf("%s", pagesJSON))
+	}
+}
+
+func saveTweet(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		idUser := r.FormValue("id_user")
+		idTweet := r.FormValue("id_tweet")
 		// Create
-		DB.Create(&Tweet{IDUser: "L1212", IDTweet: fmt.Sprintf("%s%d", "qsd43", i)})
+		DB.Create(&Tweet{IDUser: idUser, IDTweet: idTweet})
+		fmt.Fprintf(w, "Add new TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
+	}
+}
+
+func unsaveTweet(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		idUser := r.FormValue("id_user")
+		idTweet := r.FormValue("id_tweet")
+		// Create
+		DB.Delete(&Tweet{IDUser: idUser, IDTweet: idTweet})
+		fmt.Fprintf(w, "Delete TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
 	}
 }

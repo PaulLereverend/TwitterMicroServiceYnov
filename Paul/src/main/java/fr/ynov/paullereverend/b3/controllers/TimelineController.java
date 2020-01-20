@@ -11,6 +11,7 @@ import fr.ynov.paullereverend.b3.services.TimelineService;
 import twitter4j.JSONException;
 import twitter4j.JSONObject;
 import twitter4j.Status;
+import twitter4j.TwitterException;
 
 @RestController
 public class TimelineController {
@@ -23,15 +24,23 @@ public class TimelineController {
 	public String getById(@PathVariable String id) {
 		Status tweet = service.getTweet(id);
 		JSONObject json = new JSONObject();
-		
 		try {
 			json.put("text", tweet.getText());
 			json.put("user", tweet.getUser().getScreenName());
 			json.put("date", tweet.getCreatedAt());
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return json.toString();
+	}
+	@RequestMapping(value = "/timeline", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getTimeline() {
+		try {
+			return service.getTimeline().toString();
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }

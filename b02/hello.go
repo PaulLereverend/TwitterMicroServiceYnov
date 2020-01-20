@@ -16,29 +16,34 @@ type Tweet struct {
 	IDTweet string
 }
 
+//DB variable globale de la bdd
+var DB *gorm.DB
+var i = 0
+
 func main() {
-	fmt.Println("Hello, world.")
+	fmt.Println("Hello, world. 2")
 
 	db, err := gorm.Open("sqlite3", "test.db")
 	if err != nil {
 		panic("failed to connect database")
+	} else {
+		DB = db
 	}
 	defer db.Close()
 
 	// Migrate the schema
 	db.AutoMigrate(&Tweet{})
 
+	i++
 	// Create
-	db.Create(&Tweet{IDUser: "L1212", IDTweet: "aze43Ezez43"})
+	db.Create(&Tweet{IDUser: "L1212", IDTweet: fmt.Sprintf("%s%d", "qsd43", i)})
 
 	// Read
-	var tweet Tweet
-	db.Find(&tweet)
-	fmt.Println(&tweet)
-	db.First(&tweet, 1) // find tweet with id 1
-	fmt.Println(&tweet)
-	db.First(&tweet, "id_tweet = ?", "L1212") // find tweet with IDTweet l1212
-	fmt.Println(&tweet)
+	// var tweet Tweet
+	// db.Find(&tweet)
+	// db.First(&tweet, 1) // find tweet with id 1
+	// db.First(&tweet, "id_tweet = ?", "L1212") // find tweet with IDTweet l1212
+	// fmt.Println(&tweet)
 
 	// Update - update tweet's IDTweet to qsd43Ezez43
 	// db.Model(&tweet).Update("id_tweet", "qsd43Ezez43")
@@ -56,16 +61,18 @@ func hello(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if r.Method == "POST" {
-		// Call ParseForm() to parse the raw query and update r.PostForm and r.Form.
-		if err := r.ParseForm(); err != nil {
-			fmt.Fprintf(w, "ParseForm() err: %v", err)
-			return
-		}
-		fmt.Fprintf(w, "Post from website! r.PostFrom = %v\n", r.PostForm)
+	if r.Method == "GET" {
 		idUser := r.FormValue("id_user")
-		fmt.Fprintf(w, "id_user = %s\n", idUser)
-	} else {
-		fmt.Fprintf(w, "Sorry, only GET and POST methods are supported.")
+
+		var tweets []Tweet
+		DB.Where("id_user = ?", idUser).Find(&tweets) // find tweet with IDUser l1212
+
+		for _, tweet := range tweets {
+			fmt.Fprintf(w, tweet.IDTweet+"\n")
+		}
+	} else if r.Method == "POST" {
+		i++
+		// Create
+		DB.Create(&Tweet{IDUser: "L1212", IDTweet: fmt.Sprintf("%s%d", "qsd43", i)})
 	}
 }

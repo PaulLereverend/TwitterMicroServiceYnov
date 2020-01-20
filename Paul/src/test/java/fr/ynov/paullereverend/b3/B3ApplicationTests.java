@@ -1,10 +1,10 @@
-package fr.ynov.paullereverend.microservicetwitterauth;
+package fr.ynov.paullereverend.b3;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicetwitterauthApplicationTests {
+class B3ApplicationTests {
 
 	@Test
 	void contextLoads() {

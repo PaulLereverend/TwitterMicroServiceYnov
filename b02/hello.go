@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 
@@ -17,11 +16,17 @@ type Tweet struct {
 	IDTweet string
 }
 
+//Response model
+type Response struct {
+	ResCode string
+	Data    string
+}
+
 //DB variable globale de la bdd
 var DB *gorm.DB
 
 func main() {
-	db, err := gorm.Open("sqlite3", "test.db")
+	db, err := gorm.Open("sqlite3", "tweet_user.db")
 	if err != nil {
 		panic("failed to connect database")
 	} else {
@@ -47,12 +52,9 @@ func getTweets(w http.ResponseWriter, r *http.Request) {
 		var tweets []Tweet
 		DB.Where("id_user = ?", idUser).Find(&tweets)
 
-		//encode en JSON les réponses
-		pagesJSON, err := json.Marshal(tweets)
-		if err != nil {
-			log.Fatal("Cannot encode to JSON ", err)
-		}
-		fmt.Fprintf(w, fmt.Sprintf("%s", pagesJSON))
+		responseJSON(w, http.StatusOK, tweets)
+	} else {
+		responseJSON(w, http.StatusNotFound, nil)
 	}
 }
 
@@ -61,8 +63,11 @@ func saveTweet(w http.ResponseWriter, r *http.Request) {
 		idUser := r.FormValue("id_user")
 		idTweet := r.FormValue("id_tweet")
 		// crée le lien entre l'utilisateur et le tweet
-		DB.Create(&Tweet{IDUser: idUser, IDTweet: idTweet})
-		fmt.Fprintf(w, "Add new TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
+		newData := DB.Create(&Tweet{IDUser: idUser, IDTweet: idTweet})
+
+		responseJSON(w, http.StatusOK, newData)
+	} else {
+		responseJSON(w, http.StatusNotFound, nil)
 	}
 }
 
@@ -75,8 +80,27 @@ func unsaveTweet(w http.ResponseWriter, r *http.Request) {
 		var tweet Tweet
 		DB.Where("id_user = ?", idUser).Where("id_tweet = ?", idTweet).Find(&tweet)
 
-		//supprime le lien entre l'utilisateur et le tweet
-		DB.Delete(&tweet)
-		fmt.Fprintf(w, "Delete TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
+		//s'il y a bien un lien entre l'utilisateur et le tweet de trouvé alors on supprime
+		if tweet.ID != 0 {
+			//supprime le lien entre l'utilisateur et le tweet
+			delData := DB.Delete(&tweet)
+			responseJSON(w, http.StatusOK, delData)
+		} else {
+			responseJSON(w, http.StatusBadRequest, nil)
+		}
+	} else {
+		responseJSON(w, http.StatusNotFound, nil)
 	}
+}
+
+func responseJSON(w http.ResponseWriter, status int, payload interface{}) {
+	response, err := json.Marshal(payload)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte(err.Error()))
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	w.Write([]byte(response))
 }

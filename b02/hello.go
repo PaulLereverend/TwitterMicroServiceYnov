@@ -47,7 +47,7 @@ func getTweets(w http.ResponseWriter, r *http.Request) {
 		var tweets []Tweet
 		DB.Where("id_user = ?", idUser).Find(&tweets)
 
-		//encode en JSON les tweets
+		//encode en JSON les réponses
 		pagesJSON, err := json.Marshal(tweets)
 		if err != nil {
 			log.Fatal("Cannot encode to JSON ", err)
@@ -60,18 +60,23 @@ func saveTweet(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		idUser := r.FormValue("id_user")
 		idTweet := r.FormValue("id_tweet")
-		// Create
+		// crée le lien entre l'utilisateur et le tweet
 		DB.Create(&Tweet{IDUser: idUser, IDTweet: idTweet})
 		fmt.Fprintf(w, "Add new TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
 	}
 }
 
 func unsaveTweet(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
+	if r.Method == "DELETE" {
 		idUser := r.FormValue("id_user")
 		idTweet := r.FormValue("id_tweet")
-		// Create
-		DB.Delete(&Tweet{IDUser: idUser, IDTweet: idTweet})
+
+		//recup le lien entre l'utilisateur et le tweet souhaintant être supprimée
+		var tweet Tweet
+		DB.Where("id_user = ?", idUser).Where("id_tweet = ?", idTweet).Find(&tweet)
+
+		//supprime le lien entre l'utilisateur et le tweet
+		DB.Delete(&tweet)
 		fmt.Fprintf(w, "Delete TweetUser : {IDUser %s IDTweet %s}", idUser, idTweet)
 	}
 }

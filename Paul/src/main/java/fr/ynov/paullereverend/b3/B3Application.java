@@ -1,13 +1,13 @@
-package fr.ynov.paullereverend.microservicetwitterauth;
+package fr.ynov.paullereverend.b3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroservicetwitterauthApplication {
+public class B3Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservicetwitterauthApplication.class, args);
+		SpringApplication.run(B3Application.class, args);
 	}
 
 }

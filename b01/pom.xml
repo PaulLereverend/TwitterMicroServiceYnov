@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.twitterapi</groupId>
-	<artifactId>twitterapi</artifactId>
+	<artifactId>b1</artifactId>
 	<version>v1</version>
     <name>b1</name>
 	<description>Demo project for Spring Boot</description>

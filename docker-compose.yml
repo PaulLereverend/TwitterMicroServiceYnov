@@ -1,9 +1,13 @@
 version: "3"
 services:
-  #   b1:
-  #     build: b01
-  #     ports:
-  #       - "8080:8081"
+  b1:
+    image: torticounette/bo1:latest
+    build: b01
+    ports:
+      - "8080:8081"
+    entrypoint: "java -jar /usr/local/lib/app.jar"
+    depends_on:
+      - bdd
   b3:
     image: torticounette/b03:latest
     build: b03

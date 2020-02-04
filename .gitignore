@@ -8,3 +8,7 @@ b02/.DS_Store
 .DS_Store
 
 b02/server
+.mysql-data/*
+b01/target/*
+b03/target/
+b01/.settings/

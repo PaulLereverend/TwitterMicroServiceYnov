@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TweetService } from './tweet.service';
+import { ApiTwitterService } from './api-twitter.service';
 
-describe('TweetService', () => {
+describe('ApiTwitterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TweetService = TestBed.get(TweetService);
+    const service: ApiTwitterService = TestBed.get(ApiTwitterService);
     expect(service).toBeTruthy();
   });
 });

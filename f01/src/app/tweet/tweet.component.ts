@@ -15,8 +15,5 @@ export class TweetComponent implements OnInit {
   };
   constructor() { }
 
-  ngOnInit() {
-    
-  }
-
+  ngOnInit() {};
 }

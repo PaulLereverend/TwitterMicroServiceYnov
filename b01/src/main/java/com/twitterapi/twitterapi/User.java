@@ -6,8 +6,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity // This tells Hibernate to make a table out of this class
+@JsonIgnoreProperties(value={ "password"}, allowSetters= true)
 public class User {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
@@ -36,7 +38,6 @@ public class User {
   public void setName(String name) {
     this.username = name;
   }
-@JsonIgnore //permet d'enlever le mot de passe des appel json
   public String getPassword() {
     return password;
   }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Tweet } from './tweet';
 
 
 @Injectable({
@@ -21,6 +23,10 @@ export class ApiService {
   }
 
   getTimeline(APIUrl) {
-  return this.http.get(APIUrl + '/timeline').subscribe();
+  return this.http.get(APIUrl + '/timeline');
   }
+  getTweet(APIUrl): Observable<Tweet> {
+    return this.http.get<Tweet>(APIUrl + '/timeline');
+    }
+
 }

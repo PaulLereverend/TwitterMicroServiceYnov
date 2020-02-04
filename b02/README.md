@@ -10,7 +10,7 @@ Il y a deux manières pour lancer le serveur :
 
 * Build and Run the executable
 
-        go buil server.go
+        go build server.go
         ./server
 
 ## Obtenir Go

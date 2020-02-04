@@ -40,9 +40,13 @@ oc apply -f {fichier_de_deploiement}
 ## Architecture 
 
 B1 : localhost:8080
+
 B2 : localhost:8082 -> Voir readme dans le dossier B2 pour les ressources
+
 B3 : localhost:8083 -> Voir readme dans le dossier B3 pour les ressources
+
 B4 : ????
+
 F1 : localhost:4201
 
 ## Support 

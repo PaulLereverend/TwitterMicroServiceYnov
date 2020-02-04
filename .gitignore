@@ -3,10 +3,8 @@ b02/b02
 
 b02/.DS_Store
 
-b02/test.db
-
-b02/tweet_user.db
-
 *.db
 
 .DS_Store
+
+b02/server

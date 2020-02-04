@@ -1,0 +1,25 @@
+version: "3"
+services:
+  #   b1:
+  #     build: b01
+  #     ports:
+  #       - "8080:8081"
+  b3:
+    image: torticounette/b03:latest
+    build: b03
+    ports:
+      - "8083:8080"
+  #   b4:
+  #     build: b04
+  #     ports:
+  #       - "8080:8084"
+  f1:
+    image: torticounette/f01:latest
+    build: f01
+    ports:
+      - "4201:4201"
+  b2:
+    image: torticounette/b02:latest
+    build: b02
+    ports:
+      - "8082:8080"

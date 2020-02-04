@@ -10,7 +10,7 @@ import { ApiService } from '../api-service.service';
 
 export class InscriptionComponent implements OnInit {
   loginForm: FormGroup;
-  apiURL = 'b1';
+  apiURL = 'b1/user/add';
 
   constructor(
     private fb: FormBuilder,

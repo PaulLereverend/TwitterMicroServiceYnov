@@ -17,7 +17,7 @@ export class ConnexionComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.fb.group({  // Crée une instance de FormGroup
       name: [''],                   // Crée une instance de FormControl
-      password: ['']                     // Crée une instance de FormControl
+      password: ['']                // Crée une instance de FormControl
     });
   }
 

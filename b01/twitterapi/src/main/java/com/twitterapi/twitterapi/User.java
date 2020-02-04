@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
   @Id
@@ -34,7 +36,7 @@ public class User {
   public void setName(String name) {
     this.username = name;
   }
-
+@JsonIgnore //permet d'enlever le mot de passe des appel json
   public String getPassword() {
     return password;
   }

@@ -81,7 +81,7 @@ public class UserController {
   }
  
   @GetMapping(path="/{id}") // Map ONLY POST Requests
-  public @ResponseBody User getuser(@PathVariable int id) {
+  public @ResponseBody Object getuser(@PathVariable int id) {
 	return userRepository.findById(id);
  }
   @GetMapping(path="/informations") // Map ONLY POST Requests

@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="register()">
     <div class="form-group">
     <label>Nom d'utilisateur</label>
-    <input type="text" class="form-control" formControlName="username">
+    <input type="text" class="form-control" formControlName="name">
     </div>
     <div class="form-group">
     <label>Mot de passe</label>
@@ -9,16 +9,16 @@
     </div>
     <div class="form-group">
         <label>api key</label>
-        <input type="text" class="form-control" formControlName="APIKey">
+        <input type="text" class="form-control" formControlName="apikey">
     </div><div class="form-group">
         <label>api secret key</label>
-        <input type="password" class="form-control" formControlName="APISecretKey">
+        <input type="password" class="form-control" formControlName="apikeysecret">
     </div><div class="form-group">
         <label>access token</label>
-        <input type="text" class="form-control" formControlName="AccessToken">
+        <input type="text" class="form-control" formControlName="accesstoken">
     </div><div class="form-group">
         <label>AccessTokenSecret</label>
-        <input type="password" class="form-control" formControlName="AccessTokenSecret">
+        <input type="password" class="form-control" formControlName="accesstokensecret">
     </div>
     <button type="submit" class="btn btn-primary">OK</button>
 </form>

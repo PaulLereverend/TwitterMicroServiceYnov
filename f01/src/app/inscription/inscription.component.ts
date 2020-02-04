@@ -17,12 +17,12 @@ export class InscriptionComponent implements OnInit {
     public restApi: ApiService) {}
   ngOnInit() {
     this.loginForm = this.fb.group({  // Crée une instance de FormGroup
-      username: ['toto'],                   // Crée une instance de FormControl
+      name: ['toto'],                   // Crée une instance de FormControl
       password: ['113'],
-      APIKey: ['rr'],
-      APISecretKey: ['feze'],
-      AccessToken: ['ff'],
-      AccessTokenSecret: ['fdf']                  // Crée une instance de FormControl
+      apikey: ['rr'],
+      apikeysecret: ['feze'],
+      accesstoken: ['ff'],
+      accesstokensecret: ['fdf']                  // Crée une instance de FormControl
     });
   }
   register() {

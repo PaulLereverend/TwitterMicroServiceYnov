@@ -44,7 +44,7 @@ public class EcriretweetApplication {
 	    Scanner sc = new Scanner(System.in);
 		System.out.println("saisir un tweet :");
 		String letweet = sc.nextLine();
-		OkHttpClient client = new OkHttpClient();
+		/*OkHttpClient client = new OkHttpClient();
 
 		MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
 		RequestBody body = RequestBody.create(mediaType, "censor-character=*&content=blacla");
@@ -58,16 +58,16 @@ public class EcriretweetApplication {
 
 		Response response = client.newCall(request).execute();
 		String bad = response.body().string();
-		//System.out.println(bad);
+		System.out.println(bad);
 		String search = "\"is-bad\":false";
 		
 		if ( bad.toLowerCase().indexOf(search.toLowerCase()) != -1 )
 	    	{twitter.updateStatus(letweet);}
 		
-		else {System.out.println("gros mot");}
+		else {System.out.println("gros mot");}*/
 		SpringApplication.run(EcriretweetApplication.class, args);
 		
-		//twitter.updateStatus(letweet);
+		twitter.updateStatus(letweet);
 	}
 	
 	

@@ -19,4 +19,8 @@ export class ApiService {
     console.log(APIUrl);
     return this.http.put(APIUrl, values);
   }
+
+  getTimeline(APIUrl) {
+  return this.http.get(APIUrl + '/timeline').subscribe();
+  }
 }

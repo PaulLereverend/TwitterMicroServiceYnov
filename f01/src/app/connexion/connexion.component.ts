@@ -9,19 +9,19 @@ import { ApiService } from '../api-service.service';
 })
 export class ConnexionComponent implements OnInit {
   loginForm: FormGroup;
-  apiURL = 'http://localhost:8081/user/login';
+  apiURL = 'b1/login';
   constructor(
   private fb: FormBuilder,
   public restApi: ApiService) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({  // Crée une instance de FormGroup
-      name: ['toto'],                   // Crée une instance de FormControl
-      password: ['113']                     // Crée une instance de FormControl
+      name: [''],                   // Crée une instance de FormControl
+      password: ['']                     // Crée une instance de FormControl
     });
   }
 
   login() {
-    this.restApi.postUser(this.apiURL + '', this.loginForm.value);
+    this.restApi.postUser(this.apiURL, this.loginForm.value);
   }
 }

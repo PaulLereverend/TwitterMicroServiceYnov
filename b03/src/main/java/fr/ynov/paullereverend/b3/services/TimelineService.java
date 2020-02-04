@@ -81,15 +81,9 @@ public class TimelineService {
 		}
 	    return tl; 
 	}
-	public Twitter config() {
-		//JSONObject obj = sendGet();
-		
+	
+	public Twitter config() {		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
-		/*cb.setDebugEnabled(false)
-		  .setOAuthConsumerKey(obj.getString("consumer_key"))
-		  .setOAuthConsumerSecret(obj.getString("consuer_secret"))
-		  .setOAuthAccessToken(obj.getString("access_token"))
-		  .setOAuthAccessTokenSecret(obj.getString("access_token_secret"));*/
 		cb.setDebugEnabled(false)
 		  .setOAuthConsumerKey("SPcQsEqo5SEcZxpVs0nbGbakj")
 		  .setOAuthConsumerSecret("OvrQ5wmngjJrqUguUgBL9nsnbBcfcjSqowZeE8q0lRMHAzbwoj")

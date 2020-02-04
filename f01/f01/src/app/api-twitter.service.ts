@@ -7,11 +7,7 @@ import { Tweet } from './tweet';
   providedIn: 'root'
 })
 export class ApiTwitterService {
-  apiURL = 'http://localhost:8083';
   constructor(private http: HttpClient) { }
 
-  getTweets(): Observable<Tweet> {
-    return this.http.get<Tweet>(this.apiURL + '/tweet/:id');
-  }
 }
 

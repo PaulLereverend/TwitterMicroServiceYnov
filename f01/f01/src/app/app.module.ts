@@ -9,6 +9,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { TweetComponent } from './tweet/tweet.component';
 import { TimelineComponent } from './timeline/timeline.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SaveTweetComponent } from './save-tweet/save-tweet.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,19 +18,20 @@ import { AppRoutingModule } from './app-routing.module';
     ConnexionComponent,
     InscriptionComponent,
     TweetComponent,
-    TimelineComponent
+    TimelineComponent,
+    SaveTweetComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 
 
-export class AppModule {
-}
+export class AppModule {}
 
 
